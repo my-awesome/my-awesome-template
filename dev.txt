@@ -1,10 +1,13 @@
 https://gohugo.io/documentation
 
+# tutorial
+https://www.youtube.com/watch?v=ccCx2jrJ8zQ
+
 # setup
 hugo new site . --force
-hugo new theme awesome
-echo theme = \"awesome\" >> config.toml
 hugo server -D
 http://localhost:1313
 
 # TODO custom archetype
+# html best practice
+https://gist.github.com/ryansechrest/8693303
