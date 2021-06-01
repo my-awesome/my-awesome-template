@@ -1,5 +1,10 @@
 https://gohugo.io/documentation
 https://docs.github.com/en/actions
+https://github.com/actions/starter-workflows
+https://cli.github.com/manual
+# trigger workflow via api
+https://docs.github.com/en/rest/reference/actions#create-a-workflow-dispatch-event
+
 
 # tutorial
 https://www.youtube.com/watch?v=ccCx2jrJ8zQ
