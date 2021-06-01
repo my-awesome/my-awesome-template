@@ -1,3 +1,9 @@
 {{ define "main" }}
     <div>list</div>
+    <br>
+    {{ range .Site.Data.github_stars }}
+        <div>{{ .url }}</div>
+        <div>{{ .title }}</div>
+        <br>
+    {{ end }}
 {{ end }}
