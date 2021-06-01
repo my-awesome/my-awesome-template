@@ -1,4 +1,5 @@
 https://gohugo.io/documentation
+https://docs.github.com/en/actions
 
 # tutorial
 https://www.youtube.com/watch?v=ccCx2jrJ8zQ
@@ -11,3 +12,14 @@ http://localhost:1313
 # TODO custom archetype
 # html best practice
 https://gist.github.com/ryansechrest/8693303
+
+https://github.com/pokurt/GitGram
+https://github.com/MadeByThePinsHub/GitGram
+
+>>> telegram bot to read messages and create commit
+
+# these are opposite (notify only)
+https://github.com/appleboy/telegram-action
+
+https://dev.to/gh-campus-experts/connecting-github-to-telegram-with-github-actions-1pbe
+https://github.com/athul/telewire
