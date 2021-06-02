@@ -10,6 +10,7 @@ gh --version
 
 TIMESTAMP=$(date "+%Y%m%d-%H%M%S")
 OUTPUT_PATH="data/telegram-${TIMESTAMP}.json"
+GIT_BRANCH="telegram-${TIMESTAMP}"
 
 # poll latest messages
 # TODO store offset
@@ -18,7 +19,7 @@ curl -s "https://api.telegram.org/bot${TELEGRAM_API_TOKEN}/getUpdates" | \
   > $OUTPUT_PATH
 
 # must be on a different branch than main
-#git checkout -b $OUTPUT_PATH
-gh pr create --base main --title "[telegram-bot] $TIMESTAMP" --body "Adds file $OUTPUT_PATH" --head
+git checkout -b $GIT_BRANCH
+gh pr create --base main --title "[telegram-bot] $TIMESTAMP" --body "Adds file $OUTPUT_PATH" --head $GIT_BRANCH
 
 echo "[-] telegram"
