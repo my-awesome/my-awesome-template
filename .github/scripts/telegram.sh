@@ -19,6 +19,6 @@ curl -s "https://api.telegram.org/bot${TELEGRAM_API_TOKEN}/getUpdates" | \
 
 # must be on a different branch than main
 #git checkout -b $OUTPUT_PATH
-gh pr create --base main --head --title "[telegram-bot] $TIMESTAMP" --body "Adds file $OUTPUT_PATH"
+gh pr create --base main --title "[telegram-bot] $TIMESTAMP" --body "Adds file $OUTPUT_PATH" --head
 
 echo "[-] telegram"
