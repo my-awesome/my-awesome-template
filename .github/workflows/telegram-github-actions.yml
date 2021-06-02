@@ -12,3 +12,4 @@ jobs:
         env:
           TELEGRAM_API_TOKEN: ${{ secrets.TELEGRAM_API_TOKEN }}
           TELEGRAM_FROM_ID: ${{ secrets.TELEGRAM_FROM_ID }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
