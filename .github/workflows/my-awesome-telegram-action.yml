@@ -1,0 +1,36 @@
+name: my-awesome-telegram-action
+
+on:
+  schedule:
+    # every hour
+    - cron: '0 * * * *'
+
+jobs:
+  telegram-action:
+    runs-on: ubuntu-latest
+    steps:
+      env:
+        TIMESTAMP: $(date "+%Y%m%d-%H%M%S")
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Download offset
+        uses: actions/download-artifact@v2
+      
+      - name: Fetch latest messages
+        run: ${{ github.workspace }}/.github/scripts/poll_telegram.sh
+        env:
+          TELEGRAM_API_TOKEN: ${{ secrets.TELEGRAM_API_TOKEN }}
+          TELEGRAM_FROM_ID: ${{ secrets.TELEGRAM_FROM_ID }}
+      
+      - name: Create pull request
+        run: ${{ github.workspace }}/.github/scripts/telegram.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload offset
+        uses: actions/upload-artifact@v2
+        with:
+          name: telegram-offset
+          path: .offset
