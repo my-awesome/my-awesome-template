@@ -17,11 +17,12 @@ OUTPUT_PATH="data/telegram.json"
 
 curl -s "https://api.telegram.org/bot${TELEGRAM_API_TOKEN}/getUpdates" | \
   jq --arg TELEGRAM_FROM_ID ${TELEGRAM_FROM_ID} '[ .result[] | select(.message.from.id==($TELEGRAM_FROM_ID|tonumber)) ] | map({"update_id": .update_id, "message_text": .message.text})' \
-  > $OUTPUT_PATH
+  > $TMP_OUTPUT_PATH
 
 # TODO
 # save latest offset ONLY if there is a new message, otherwise upload old one
 # merge "output paths" or create a new file
 # delete tmp file
+echo "123" > .offset
 
 echo "[-] poll_telegram"

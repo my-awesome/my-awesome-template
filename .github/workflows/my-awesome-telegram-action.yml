@@ -14,8 +14,9 @@ jobs:
   telegram-action:
     runs-on: ubuntu-latest
     steps:
-      env:
-        TIMESTAMP: $(date "+%Y%m%d-%H%M%S")
+      - name: Set variables
+        run: |
+          echo ::set-output name=timestamp::"$(date "+%Y%m%d-%H%M%S")"
 
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -26,12 +27,14 @@ jobs:
       - name: Fetch latest messages
         run: ${{ github.workspace }}/.github/scripts/poll_telegram.sh
         env:
+          TIMESTAMP: ${{ steps.vars.outputs.timestamp }}
           TELEGRAM_API_TOKEN: ${{ secrets.TELEGRAM_API_TOKEN }}
-          TELEGRAM_FROM_ID: ${{ secrets.TELEGRAM_FROM_ID }}
+          TELEGRAM_FROM_ID: ${{ secrets.TELEGRAM_FROM_ID }}        
       
       - name: Create pull request
-        run: ${{ github.workspace }}/.github/scripts/telegram.sh
+        run: ${{ github.workspace }}/.github/scripts/create_pr.sh
         env:
+          TIMESTAMP: ${{ steps.vars.outputs.timestamp }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload offset
