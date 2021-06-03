@@ -27,9 +27,9 @@ git config user.name "my-awesome-bot"
 git checkout -b $GIT_BRANCH
 git add $OUTPUT_PATH
 git status
-# fails without quotes
+# fails without quotes: "quote all values that have spaces"
 git commit -m "$GIT_MESSAGE"
 git push origin $GIT_BRANCH
-gh pr create --base main --title "[telegram-bot] $TIMESTAMP" --body $GIT_MESSAGE --head $GIT_BRANCH
+gh pr create --head $GIT_BRANCH --title "[telegram-bot] $TIMESTAMP" --body "$GIT_MESSAGE" 
 
 echo "[-] telegram"
