@@ -20,6 +20,9 @@ curl -s "https://api.telegram.org/bot${TELEGRAM_API_TOKEN}/getUpdates" | \
   jq --arg TELEGRAM_FROM_ID ${TELEGRAM_FROM_ID} '[ .result[] | select(.message.from.id==($TELEGRAM_FROM_ID|tonumber)) ] | map({"update_id": .update_id, "message_text": .message.text})' \
   > $OUTPUT_PATH
 
+# mandatory configs
+git config user.email "my-awesome-bot@users.noreply.github.com"
+git config user.name "my-awesome-bot"
 # must be on a different branch than main
 git checkout -b $GIT_BRANCH
 git add $OUTPUT_PATH
