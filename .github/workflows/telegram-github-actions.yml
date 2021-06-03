@@ -1,6 +1,7 @@
 name: telegram-github-actions
 
-on: [ push ]
+schedule:
+  - cron: '0 * * * *'
 
 jobs:
   check-telegram:
