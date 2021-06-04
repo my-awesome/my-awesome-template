@@ -10,7 +10,7 @@ jq --version
 # TODO
 # check if offset exists and store it in and env
 # if exists pass it as query parameter increased by 1
-ls -la
+echo "[*] TIMESTAMP=${TIMESTAMP}"
 
 TMP_OUTPUT_PATH="data/telegram-${TIMESTAMP}.json"
 OUTPUT_PATH="data/telegram.json"
@@ -23,6 +23,7 @@ curl -s "https://api.telegram.org/bot${TELEGRAM_API_TOKEN}/getUpdates" | \
 # save latest offset ONLY if there is a new message, otherwise upload old one
 # merge "output paths" or create a new file
 # delete tmp file
+# >>> data/.telegram
 echo "123" > .offset
 
 echo "[-] poll_telegram"
