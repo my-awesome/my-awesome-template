@@ -27,4 +27,6 @@ git commit -m "$GIT_MESSAGE"
 git push origin $GIT_BRANCH
 gh pr create --head $GIT_BRANCH --title "[telegram-bot] $TIMESTAMP" --body "$GIT_MESSAGE"
 
+gh pr merge $GIT_BRANCH
+
 echo "[-] create_pr"
