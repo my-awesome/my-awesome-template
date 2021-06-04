@@ -17,7 +17,7 @@ jobs:
       # TODO fixme
       - name: Set variables
         env:
-          TIMESTAMP: ${{ date "+%Y%m%d-%H%M%S" }}
+          TIMESTAMP: ${{ $(date "+%Y%m%d-%H%M%S") }}
         run: echo "$TIMESTAMP"
 
       - name: Checkout repository
