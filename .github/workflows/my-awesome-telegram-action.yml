@@ -16,9 +16,7 @@ jobs:
     steps:
       # TODO fixme
       - name: Set variables
-        env:
-          TIMESTAMP: ${{ $(date "+%Y%m%d-%H%M%S") }}
-        run: echo "$TIMESTAMP"
+        run: echo ::set-output name=TIMESTAMP::"$(date +%Y%m%d-%H%M%S)"
 
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -29,14 +27,14 @@ jobs:
       - name: Fetch latest messages
         run: ${{ github.workspace }}/.github/scripts/poll_telegram.sh
         env:
-          TIMESTAMP: ${{ env.TIMESTAMP }}
+          TIMESTAMP: ${{ steps.vars.outputs.TIMESTAMP }}
           TELEGRAM_API_TOKEN: ${{ secrets.TELEGRAM_API_TOKEN }}
           TELEGRAM_FROM_ID: ${{ secrets.TELEGRAM_FROM_ID }}        
       
       - name: Create pull request
         run: ${{ github.workspace }}/.github/scripts/create_pr.sh
         env:
-          TIMESTAMP: ${{ env.TIMESTAMP }}
+          TIMESTAMP: ${{ steps.vars.outputs.TIMESTAMP }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload offset
