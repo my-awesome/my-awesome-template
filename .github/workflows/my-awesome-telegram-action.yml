@@ -17,7 +17,7 @@ jobs:
       # TODO fixme
       - name: Set variables
         run: |
-          echo ::set-output name=TIMESTAMP::"$(date +%Y%m%d-%H%M%S)"
+          echo "TIMESTAMP=$(date +%Y%m%d-%H%M%S)" >> $GITHUB_ENV
       
       - name: Dump GitHub context
         env:
@@ -50,12 +50,12 @@ jobs:
       - name: Fetch latest messages
         run: ${{ github.workspace }}/.github/scripts/poll_telegram.sh
         env:
-          TIMESTAMP: ${{ steps.vars.outputs.TIMESTAMP }}
+          TIMESTAMP: ${{ env.TIMESTAMP }}
           TELEGRAM_API_TOKEN: ${{ secrets.TELEGRAM_API_TOKEN }}
           TELEGRAM_FROM_ID: ${{ secrets.TELEGRAM_FROM_ID }}        
       
       - name: Create pull request
         run: ${{ github.workspace }}/.github/scripts/create_pr.sh
         env:
-          TIMESTAMP: ${{ steps.vars.outputs.TIMESTAMP }}
+          TIMESTAMP: ${{ env.TIMESTAMP }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
