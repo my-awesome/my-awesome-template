@@ -16,8 +16,11 @@ PR_MESSAGE="Updates telegram messages"
 
 ##############################
 
+# 1 line string
+MY_GIT=$(git status)
+
 # updates only if there are changes
-if echo $(git status) | grep -q "up-to-date"; then
+if [[ -z "${MY_GIT##*nothing to commit*}" ]]; then
   echo "[-] Skipped"
 else
   echo "[-] Updating repository ..."
