@@ -73,7 +73,7 @@ function request_latest_messages {
   # }
   # use "-c" to have 1 line  
   echo $(curl -s ${REQUEST_URL}) | jq -c --arg TELEGRAM_FROM_ID ${TELEGRAM_FROM_ID} \
-    '[ .result[] | select(.message.from.id==($TELEGRAM_FROM_ID|tonumber)) ] | map({"update_id": .update_id, "message_text": .message.text})'
+    '[ .result[] | select(.message.from.id==($TELEGRAM_FROM_ID|tonumber)) ] | map({"update_id": .update_id, "message_text": [ .message.text | gsub("\\s+";"\n") | splits("\n")]  })'
 }
 
 function get_latest_offset {
@@ -97,10 +97,11 @@ function update_offset {
 
 function concat_messages {
   local VALUES=$1
+  local OLD_VALUES="$(cat ${OUTPUT_PATH} | jq '.')"
 
   # mandatory quotes on argjson value
   jq -n \
-    --argjson OLD_MESSAGES "$(cat ${OUTPUT_PATH} | jq '.')" \
+    --argjson OLD_MESSAGES "${OLD_VALUES}" \
     --argjson NEW_MESSAGES "${VALUES}" \
     '$OLD_MESSAGES + $NEW_MESSAGES' \
     > ${OUTPUT_PATH}
