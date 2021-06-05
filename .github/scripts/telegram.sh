@@ -76,6 +76,18 @@ function request_latest_messages {
     '[ .result[] | select(.message.from.id==($TELEGRAM_FROM_ID|tonumber)) ] | map({"update_id": .update_id, "message_text": [ try(.message.text) catch "" | gsub("\\s+";"\n") | splits("\n")] })'
 }
 
+function concat_messages {
+  local VALUES=$1
+  local OLD_VALUES="$(cat ${OUTPUT_PATH} | jq '.')"
+
+  # mandatory quotes on argjson value
+  jq -n \
+    --argjson OLD_MESSAGES "${OLD_VALUES}" \
+    --argjson NEW_MESSAGES "${VALUES}" \
+    '$OLD_MESSAGES + $NEW_MESSAGES' \
+    > ${OUTPUT_PATH}
+}
+
 function get_latest_offset {
   # expected format: [{"update_id":123,"message_text":"hello"}]
   local JSON_STRING=$1
@@ -93,18 +105,6 @@ function update_offset {
     sed -i "s/^offset=.*/offset=${VALUE}/" ${PROPERTIES_PATH}
     echo "[-] Offset updated"
   fi
-}
-
-function concat_messages {
-  local VALUES=$1
-  local OLD_VALUES="$(cat ${OUTPUT_PATH} | jq '.')"
-
-  # mandatory quotes on argjson value
-  jq -n \
-    --argjson OLD_MESSAGES "${OLD_VALUES}" \
-    --argjson NEW_MESSAGES "${VALUES}" \
-    '$OLD_MESSAGES + $NEW_MESSAGES' \
-    > ${OUTPUT_PATH}
 }
 
 ##############################

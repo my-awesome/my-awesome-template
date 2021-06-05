@@ -21,7 +21,7 @@ MY_GIT=$(git status)
 
 # updates only if there are changes
 if [[ -z "${MY_GIT##*nothing to commit*}" ]]; then
-  echo "[-] Skipped"
+  echo "[-] No changes"
 else
   echo "[-] Updating repository ..."
 
