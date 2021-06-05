@@ -5,7 +5,9 @@ name: my-awesome-telegram-action
 #    # every hour
 #    - cron: '0 * * * *'
 
-on: [ push ]
+on:
+  - push
+  - workflow_dispatch
 
 # TODO action to deploy hugo on pr merged
 jobs:
