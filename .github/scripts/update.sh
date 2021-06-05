@@ -16,10 +16,8 @@ PR_MESSAGE="Updates telegram messages"
 
 ##############################
 
-GIT_STATUS=$(git status)
-
-# "-z" operator returns true if the string length is zero
-if [[ -z "${GIT_STATUS##*up-to-date*}" ]]; then
+# updates only if there are changes
+if echo $(git status) | grep -q "up-to-date"; then
   echo "[-] Updating repository ..."
 
   # mandatory configs
