@@ -7,9 +7,7 @@ name: my-awesome-telegram-action
 
 on: [ push ]
 
-# TODO
-# action to auto-merge branches starting with prefix
-# action to deploy hugo on pr merged
+# TODO action to deploy hugo on pr merged
 jobs:
   telegram-action:
     runs-on: ubuntu-latest
@@ -24,12 +22,12 @@ jobs:
       - name: Fetch latest messages
         run: ${{ github.workspace }}/.github/scripts/telegram.sh
         env:
-          TIMESTAMP: ${{ env.TIMESTAMP }}
+          # added manually
           TELEGRAM_API_TOKEN: ${{ secrets.TELEGRAM_API_TOKEN }}
           TELEGRAM_FROM_ID: ${{ secrets.TELEGRAM_FROM_ID }}        
       
-      - name: Create pull request
-        run: ${{ github.workspace }}/.github/scripts/create_pr.sh
+      - name: Update repository
+        run: ${{ github.workspace }}/.github/scripts/update.sh
         env:
           TIMESTAMP: ${{ env.TIMESTAMP }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
