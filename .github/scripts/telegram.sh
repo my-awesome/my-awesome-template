@@ -73,7 +73,7 @@ function request_latest_messages {
   # }
   # use "-c" to have 1 line  
   echo $(curl -s ${REQUEST_URL}) | jq -c --arg TELEGRAM_FROM_ID ${TELEGRAM_FROM_ID} \
-    '[ .result[] | select(.message.from.id==($TELEGRAM_FROM_ID|tonumber)) ] | map({"update_id": .update_id, "message_text": [ .message.text | gsub("\\s+";"\n") | splits("\n")]  })'
+    '[ .result[] | select(.message.from.id==($TELEGRAM_FROM_ID|tonumber)) ] | map({"update_id": .update_id, "message_text": [ try(.message.text) catch "" | gsub("\\s+";"\n") | splits("\n")] })'
 }
 
 function get_latest_offset {
