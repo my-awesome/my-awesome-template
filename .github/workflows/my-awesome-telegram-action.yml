@@ -1,13 +1,11 @@
 name: my-awesome-telegram-action
 
-#on:
-#  schedule:
-#    # every hour
-#    - cron: '0 * * * *'
-
 on:
-  - push
+  # enable manual trigger
   - workflow_dispatch
+  - schedule:
+    # every hour
+    - cron: '0 * * * *'
 
 # TODO action to deploy hugo on pr merged
 jobs:
