@@ -1,0 +1,11 @@
+[
+  {
+    "url": "https://github.com/gohugoio/hugo",
+    "title": "description",
+    "timestamp": "YYYYMMDD-HHmmSS",
+    "tags": [
+      { "name": "telegram", "auto": true },
+      { "name": "example", "auto": false }
+    ]
+  }
+]
