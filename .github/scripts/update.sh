@@ -18,6 +18,8 @@ PR_MESSAGE="Updates telegram messages"
 
 # updates only if there are changes
 if echo $(git status) | grep -q "up-to-date"; then
+  echo "[-] Skipped"
+else
   echo "[-] Updating repository ..."
 
   # mandatory configs
@@ -36,8 +38,6 @@ if echo $(git status) | grep -q "up-to-date"; then
 
   # automatically merge and cleanup
   gh pr merge $GIT_BRANCH --merge --delete-branch
-else
-  echo "[-] Skipped"
 fi
 
 echo "[-] update"
