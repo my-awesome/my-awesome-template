@@ -14,7 +14,6 @@ DATA_PATH="./data"
 PROPERTIES_PATH="${DATA_PATH}/telegram.properties"
 
 # ONLY for local testing
-#TIMESTAMP=$(date +%Y%m%d-%H%M%S)
 #TELEGRAM_API_TOKEN=
 #TELEGRAM_FROM_ID=
 source "${DATA_PATH}/telegram.secrets"
@@ -26,7 +25,6 @@ source ${PROPERTIES_PATH}
 API_URL=$api_url
 CURRENT_OFFSET=$offset
 
-echo "[*] TIMESTAMP=${TIMESTAMP}"
 echo "[*] OUTPUT_PATH=${OUTPUT_PATH}"
 echo "[*] PROPERTIES_PATH=${PROPERTIES_PATH}"
 echo "[*] API_URL=${API_URL}"
@@ -97,6 +95,17 @@ function update_offset {
   fi
 }
 
+function concat_messages {
+  local VALUES=$1
+
+  # mandatory quotes on argjson value
+  jq -n \
+    --argjson OLD_MESSAGES "$(cat ${OUTPUT_PATH} | jq '.')" \
+    --argjson NEW_MESSAGES "${VALUES}" \
+    '$OLD_MESSAGES + $NEW_MESSAGES' \
+    > ${OUTPUT_PATH}
+}
+
 ##############################
 
 function main {
@@ -104,14 +113,13 @@ function main {
 
   local MESSAGES=$(request_latest_messages)
   echo -e "[*] MESSAGES=\n${MESSAGES}"
+
+  local OLD_COUNT=$(cat ${OUTPUT_PATH} | jq '.[] | length')
+  local NEW_COUNT=$(echo ${MESSAGES} | jq '.[] | length')
+  echo "[*] OLD_COUNT=${OLD_COUNT}"
+  echo "[*] NEW_COUNT=${NEW_COUNT}"
   
-  # TODO
-  # mandatory quotes on argjson value
-  jq -n \
-    --argjson OLD_MESSAGES "$(cat ${OUTPUT_PATH} | jq '.')" \
-    --argjson NEW_MESSAGES "${MESSAGES}" \
-    '$OLD_MESSAGES + $NEW_MESSAGES' \
-    > ${OUTPUT_PATH}
+  concat_messages "${MESSAGES}"
 
   local LATEST_OFFSET=$(get_latest_offset ${MESSAGES})
   echo "[*] LATEST_OFFSET=${LATEST_OFFSET}"
@@ -119,7 +127,7 @@ function main {
   update_offset "${LATEST_OFFSET}"
 }
 
-# TODO save or remove timestamp ?
+# TODO make paths configurable
 main
 
 echo "[-] telegram"
