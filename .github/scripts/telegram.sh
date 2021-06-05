@@ -53,7 +53,7 @@ function request_latest_messages {
   #    {
   #      "update_id": 60598210,
   #      "message": {
-  #        "message_id": 23,
+  #        "message_id": 42,
   #        "from": {
   #          "id": <TELEGRAM_FROM_ID>,
   #          "is_bot": false,
@@ -114,8 +114,8 @@ function main {
   local MESSAGES=$(request_latest_messages)
   echo -e "[*] MESSAGES=\n${MESSAGES}"
 
-  local OLD_COUNT=$(cat ${OUTPUT_PATH} | jq '.[] | length')
-  local NEW_COUNT=$(echo ${MESSAGES} | jq '.[] | length')
+  local OLD_COUNT=$(cat ${OUTPUT_PATH} | jq '. | length')
+  local NEW_COUNT=$(echo ${MESSAGES} | jq '. | length')
   echo "[*] OLD_COUNT=${OLD_COUNT}"
   echo "[*] NEW_COUNT=${NEW_COUNT}"
   
@@ -128,6 +128,7 @@ function main {
 }
 
 # TODO make paths configurable
+# TODO update json structure for hugo i.e. url, tags, ...
 main
 
 echo "[-] telegram"
