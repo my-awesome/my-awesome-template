@@ -20,7 +20,6 @@ PROPERTIES_PATH="${DATA_PATH}/telegram.properties"
 source "${DATA_PATH}/telegram.secrets"
 
 OUTPUT_PATH="${DATA_PATH}/telegram.json"
-TMP_OUTPUT_PATH="${DATA_PATH}/telegram-${TIMESTAMP}.json"
 
 # "source" loads properties to env variables
 source ${PROPERTIES_PATH}
@@ -29,7 +28,6 @@ CURRENT_OFFSET=$offset
 
 echo "[*] TIMESTAMP=${TIMESTAMP}"
 echo "[*] OUTPUT_PATH=${OUTPUT_PATH}"
-echo "[*] TMP_OUTPUT_PATH=${TMP_OUTPUT_PATH}"
 echo "[*] PROPERTIES_PATH=${PROPERTIES_PATH}"
 echo "[*] API_URL=${API_URL}"
 echo "[*] CURRENT_OFFSET=${CURRENT_OFFSET}"
@@ -104,15 +102,24 @@ function update_offset {
 function main {
   echo "[+] telegram"
 
-  MESSAGES=$(request_latest_messages)
+  local MESSAGES=$(request_latest_messages)
   echo -e "[*] MESSAGES=\n${MESSAGES}"
+  
+  # TODO
+  # mandatory quotes on argjson value
+  jq -n \
+    --argjson OLD_MESSAGES "$(cat ${OUTPUT_PATH} | jq '.')" \
+    --argjson NEW_MESSAGES "${MESSAGES}" \
+    '$OLD_MESSAGES + $NEW_MESSAGES' \
+    > ${OUTPUT_PATH}
 
-  LATEST_OFFSET=$(get_latest_offset ${MESSAGES})
+  local LATEST_OFFSET=$(get_latest_offset ${MESSAGES})
   echo "[*] LATEST_OFFSET=${LATEST_OFFSET}"
 
   update_offset "${LATEST_OFFSET}"
 }
 
+# TODO save or remove timestamp ?
 main
 
 echo "[-] telegram"
