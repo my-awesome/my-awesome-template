@@ -16,7 +16,7 @@ PROPERTIES_PATH="${DATA_PATH}/telegram.properties"
 # ONLY for local testing
 #TELEGRAM_API_TOKEN=
 #TELEGRAM_FROM_ID=
-source "${DATA_PATH}/telegram.secrets"
+#source "${DATA_PATH}/telegram.secrets"
 
 OUTPUT_PATH="${DATA_PATH}/telegram.json"
 
