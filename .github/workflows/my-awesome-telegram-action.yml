@@ -2,7 +2,7 @@ name: my-awesome-telegram-action
 
 on:
   # enable manual trigger
-  - workflow_dispatch
+  - workflow_dispatch:
   - schedule:
     # every hour
     - cron: '0 * * * *'
