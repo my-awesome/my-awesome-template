@@ -18,8 +18,8 @@ PR_MESSAGE="Updates telegram messages"
 
 GIT_STATUS=$(git status)
 
-# "-n" compares non-zero string
-if [[ -n "${GIT_STATUS##*up-to-date*}" ]]; then
+# "-z" operator returns true if the string length is zero
+if [[ -z "${GIT_STATUS##*up-to-date*}" ]]; then
   echo "[-] Updating repository ..."
 
   # mandatory configs
