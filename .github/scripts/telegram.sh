@@ -116,7 +116,8 @@ function parse_messages {
     })'
 }
 
-function concat_messages {
+# global param: <DATA_PATH>
+function append_messages {
   local VALUES=$1
   local OLD_VALUES="$(cat ${DATA_PATH} | jq '.')"
 
@@ -136,16 +137,16 @@ function concat_messages {
 # - telegram has a retention period, so eventually invalid or not processed messages will be dropped anyway
 function main {
   echo "[*] DATA_PATH=${DATA_PATH}"
-  echo "[*] OFFSET=$(get_latest_offset)"
-  echo "[*] COUNT=$(count_messages)"
+  echo "[*] current offset: $(get_latest_offset)"
+  echo "[*] current count: $(count_messages)"
 
   local MESSAGES=$(parse_messages)
   echo -e "[*] MESSAGES=\n${MESSAGES}"
   
-  concat_messages "${MESSAGES}"
+  append_messages "${MESSAGES}"
 
-  echo "[*] NEW_OFFSET=$(get_latest_offset)"
-  echo "[*] NEW_COUNT=$(count_messages)"
+  echo "[*] latest offset: $(get_latest_offset)"
+  echo "[*] latest count: $(count_messages)"
 }
 
 # TODO interactive bot
