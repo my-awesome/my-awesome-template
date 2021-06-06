@@ -106,13 +106,11 @@ function parse_messages {
     map({
       "update_id": .update_id,
       "timestamp": .timestamp,
-      "message_text": {
-        "url": .message_text[] | select(. | startswith($URL_FILTER)),
-        "tags": (
-          [{ "name": "telegram", "auto": true }] +
-          (.message_text | map(select(. | startswith($URL_FILTER) | not)) | map({ "name": . | ascii_downcase, "auto": false }))
-        )
-      }
+      "url": .message_text[] | select(. | startswith($URL_FILTER)),
+      "tags": (
+        [{ "name": "telegram", "auto": true }] +
+        (.message_text | map(select(. | startswith($URL_FILTER) | not)) | map({ "name": . | ascii_downcase, "auto": false }))
+      )
     })'
 }
 

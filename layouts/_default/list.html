@@ -1,9 +1,10 @@
 {{ define "main" }}
     <div>list</div>
     <br>
-    {{ range .Site.Data.github_stars }}
+    {{ range .Site.Data.telegram }}
+        <div>{{ .timestamp }}</div>
         <div>{{ .url }}</div>
-        <div>{{ .title }}</div>
+        <Ul>{{ range .tags }}<li>{{ .name }}</li>{{ end }}</Ul>
         <br>
     {{ end }}
 {{ end }}
