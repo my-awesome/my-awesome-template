@@ -23,6 +23,7 @@ jobs:
         run: ${{ github.workspace }}/.github/scripts/telegram.sh
         env:
           DATA_PATH: "./data/telegram.json"
+          TIMESTAMP: ${{ env.TIMESTAMP }}
           # add secrets manually
           TELEGRAM_API_TOKEN: ${{ secrets.TELEGRAM_API_TOKEN }}
           TELEGRAM_FROM_ID: ${{ secrets.TELEGRAM_FROM_ID }}        

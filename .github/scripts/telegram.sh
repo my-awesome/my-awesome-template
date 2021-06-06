@@ -9,7 +9,7 @@ curl --version
 jq --version
 
 # ONLY for local testing: "source" loads env variables
-source "./data/telegram.secrets"
+#source "./telegram.secrets"
 
 ##############################
 
@@ -46,10 +46,11 @@ function request_latest_messages {
 }
 
 # global param: <TELEGRAM_FROM_ID>
+# global param: <TIMESTAMP>
 function validate_messages {
   local RESPONSE=$(request_latest_messages)
 
-  # sample response: "text" field is optional
+  # sample response
   # {
   #   "ok": true,
   #   "result": [
@@ -74,10 +75,19 @@ function validate_messages {
   #    }
   #  ]
   # }
-  echo ${RESPONSE} | jq -c --arg TELEGRAM_FROM_ID ${TELEGRAM_FROM_ID} \
+  # 
+  # - filters messages from a specific user id
+  # - "update_id" is used for the offset parameter
+  # - "text" field is optional e.g. images
+  # - converts whitespaces in new lines
+  # - convert string to array splitting by new line
+  echo ${RESPONSE} | jq -c \
+    --arg TELEGRAM_FROM_ID ${TELEGRAM_FROM_ID} \
+    --arg TIMESTAMP ${TIMESTAMP} \
     '[ .result[] | select(.message.from.id==($TELEGRAM_FROM_ID | tonumber)) ] |
       map({
         "update_id": .update_id,
+        "timestamp": $TIMESTAMP,
         "message_text": [ try(.message.text) catch "" | gsub("\\s+";"\n") | splits("\n") ]
       })'
 }
@@ -85,10 +95,25 @@ function validate_messages {
 function parse_messages {
   local MESSAGES=$(validate_messages)
 
-  # expected format: [] or [{"update_id":123,"message_text":["test"]}]
+  # TODO this will keep all invalid messages
+  # "url": (.message_text[] | select(. | startswith("http")) // "INVALID_URL")
 
-  # TODO
-  echo $MESSAGES
+  # - expected format: [{"update_id":123,"message_text":["hello","world"]}]
+  # - discard messages with without text e.g. images: [{"update_id":123,"message_text":[""]}]
+  # - set as "url" the first item that starts with "http" and convert everything else to a tag
+  echo $MESSAGES | jq \
+    --arg URL_FILTER "http" \ '. | map(select(.message_text[0] != "")) |
+    map({
+      "update_id": .update_id,
+      "timestamp": .timestamp,
+      "message_text": {
+        "url": .message_text[] | select(. | startswith($URL_FILTER)),
+        "tags": (
+          [{ "name": "telegram", "auto": true }] +
+          (.message_text | map(select(. | startswith($URL_FILTER) | not)) | map({ "name": . | ascii_downcase, "auto": false }))
+        )
+      }
+    })'
 }
 
 function concat_messages {
@@ -105,6 +130,10 @@ function concat_messages {
 
 ##############################
 
+# - when the offset parameter is passed, all the messages with a lower offeset/update_id will be deleted from telegram "queue"
+# - messages are marked as read, always on the next execution, when the latest offset is passed
+# - if there are only invalid messages always the latest known offset is passed, until a valid one is stored
+# - telegram has a retention period, so eventually invalid or not processed messages will be dropped anyway
 function main {
   echo "[*] DATA_PATH=${DATA_PATH}"
   echo "[*] OFFSET=$(get_latest_offset)"
@@ -119,8 +148,8 @@ function main {
   echo "[*] NEW_COUNT=$(count_messages)"
 }
 
-# TODO make paths configurable
-# TODO update json structure for hugo i.e. url, tags, ...
+# TODO interactive bot
+# TODO notify on telegram success/failure
 main
 
 echo "[-] telegram"
