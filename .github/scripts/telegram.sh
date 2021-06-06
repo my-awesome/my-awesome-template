@@ -36,6 +36,10 @@ function build_query_params {
 function build_url {
   local OFFSET_PARAM=$(build_query_params)
 
+  # - when the offset parameter is passed, all the messages with a lower offset/update_id will be deleted from telegram "queue"
+  # - messages are marked as read always on the next execution, when the latest offset is passed
+  # - if there are only invalid messages always the latest known offset is passed, until a valid one is stored
+  # - telegram has a retention period, so eventually invalid or not processed messages will be dropped anyway
   echo "https://api.telegram.org/bot${TELEGRAM_API_TOKEN}/getUpdates${OFFSET_PARAM}"
 }
 
@@ -77,10 +81,10 @@ function validate_messages {
   # }
   # 
   # - filters messages from a specific user id
-  # - "update_id" is used for the offset parameter
-  # - "text" field is optional e.g. images
+  # - "update_id" is used as offset parameter
+  # - handles optional "text" field e.g. images
   # - converts whitespaces in new lines
-  # - convert string to array splitting by new line
+  # - converts string to array splitting by new line
   echo ${RESPONSE} | jq -c \
     --arg TELEGRAM_FROM_ID ${TELEGRAM_FROM_ID} \
     --arg TIMESTAMP ${TIMESTAMP} \
@@ -129,10 +133,6 @@ function append_messages {
 
 ##############################
 
-# - when the offset parameter is passed, all the messages with a lower offeset/update_id will be deleted from telegram "queue"
-# - messages are marked as read, always on the next execution, when the latest offset is passed
-# - if there are only invalid messages always the latest known offset is passed, until a valid one is stored
-# - telegram has a retention period, so eventually invalid or not processed messages will be dropped anyway
 function main {
   echo "[*] DATA_PATH=${DATA_PATH}"
   echo "[*] current offset: $(get_latest_offset)"
