@@ -9,7 +9,7 @@ curl --version
 jq --version
 
 # ONLY for local testing: "source" loads env variables
-source "./telegram.secrets"
+#source "./telegram.secrets"
 
 ##############################
 
