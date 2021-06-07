@@ -1,22 +1,7 @@
 [
   {
     "update_id": 60598262,
-    "timestamp": "20210606-170256",
-    "url": "https://github.com/",
-    "tags": [
-      {
-        "name": "telegram",
-        "auto": true
-      },
-      {
-        "name": "mytag",
-        "auto": false
-      }
-    ]
-  },
-  {
-    "update_id": 60598263,
-    "timestamp": "20210606-170256",
+    "timestamp": "20210606-180103",
     "url": "https://github.com/",
     "tags": [
       {

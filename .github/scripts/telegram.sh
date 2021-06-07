@@ -9,7 +9,7 @@ curl --version
 jq --version
 
 # ONLY for local testing: "source" loads env variables
-#source "./telegram.secrets"
+source "./telegram.secrets"
 
 ##############################
 
@@ -139,7 +139,7 @@ function main {
   echo "[*] current count: $(count_messages)"
 
   local MESSAGES=$(parse_messages)
-  echo -e "[*] MESSAGES=\n${MESSAGES}"
+  echo -e "[*] new messages:\n${MESSAGES}"
   
   append_messages "${MESSAGES}"
 

@@ -1,10 +1,3 @@
 {{ define "main" }}
     <div>list</div>
-    <br>
-    {{ range .Site.Data.telegram }}
-        <div>{{ .timestamp }}</div>
-        <div>{{ .url }}</div>
-        <Ul>{{ range .tags }}<li>{{ .name }}</li>{{ end }}</Ul>
-        <br>
-    {{ end }}
 {{ end }}
