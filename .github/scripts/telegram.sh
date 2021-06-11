@@ -13,6 +13,16 @@ jq --version
 
 ##############################
 
+function install_pup {
+  local PUP_URL="https://github.com/ericchiang/pup/releases/download/v0.4.0/pup_v0.4.0_linux_amd64.zip"
+
+  # "-x" operator checks file permissions
+  [[ -x "$(command -v pup)" ]] && echo "[-] pup already installed" || \
+    wget -q -o- ${PUP_URL} && unzip "pup_*.zip"
+
+  ./pup --version
+}
+
 # global param: <DATA_PATH>
 function count_messages {
   echo $(cat ${DATA_PATH} | jq '. | length')
@@ -149,6 +159,8 @@ function main {
 
 # TODO interactive bot
 # TODO notify on telegram success/failure
-main
+#main
+install_pup
+
 
 echo "[-] telegram"
