@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
   # TODO restrict path and branch name
   pull_request:
-    types: [ closed ]
+    #types: [ closed ]
     #merged: true
 
 jobs:
