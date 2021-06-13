@@ -14,5 +14,17 @@
         "auto": false
       }
     ]
+  },
+  {
+    "update_id": 60598273,
+    "timestamp": "20210613-142708",
+    "url": "https://github.com/niqdev/",
+    "description": "niqdev · GitHub",
+    "tags": [
+      {
+        "name": "telegram",
+        "auto": true
+      }
+    ]
   }
 ]
