@@ -1,4 +1,4 @@
-name: my-awesome-telegram-action
+name: my-awesome-telegram
 
 on:
   # enable manual trigger
@@ -7,9 +7,8 @@ on:
     # every 12 hours
     - cron: '0 0,12 * * *'
 
-# TODO action to deploy hugo on pr merged
 jobs:
-  telegram-action:
+  telegram:
     runs-on: ubuntu-latest
     steps:
       - name: Set variables
@@ -19,7 +18,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
       
-      - name: Fetch latest messages
+      - name: Fetch latest Telegram messages
         run: ${{ github.workspace }}/.github/scripts/telegram.sh
         env:
           DATA_PATH: "./data/telegram.json"
