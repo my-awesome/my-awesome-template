@@ -3,14 +3,11 @@ name: github-pages
 on:
   # enable manual trigger
   workflow_dispatch:
-  # TODO disable
+  # TODO restrict user (bot), path and branch name
+  # https://github.community/t/trigger-workflow-only-on-pull-request-merge/17359/4
   push:
     branches:
       - main
-  # TODO restrict path and branch name
-  pull_request:
-    #types: [ closed ]
-    #merged: true
 
 jobs:
   deploy:
