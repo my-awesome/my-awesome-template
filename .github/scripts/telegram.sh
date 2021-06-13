@@ -17,8 +17,8 @@ function install_pup {
   local PUP_URL="https://github.com/ericchiang/pup/releases/download/v0.4.0/pup_v0.4.0_linux_amd64.zip"
 
   # "-x" operator checks file permissions
-  [[ -x "$(command -v pup)" ]] && echo "[-] pup already installed" || \
-    wget -q -o- ${PUP_URL} && unzip "pup_*.zip"
+  [[ -x "$(command -v ./pup)" ]] && echo "[-] pup already installed" || \
+    (wget -q -o- ${PUP_URL} && unzip "pup_*.zip")
 
   ./pup --version
 }
@@ -121,6 +121,7 @@ function parse_messages {
       "update_id": .update_id,
       "timestamp": .timestamp,
       "url": .message_text[] | select(. | startswith($URL_FILTER)),
+      "description": .message_text[] | select(. | startswith($URL_FILTER)),
       "tags": (
         [{ "name": "telegram", "auto": true }] +
         (.message_text | map(select(. | startswith($URL_FILTER) | not)) | map({ "name": . | ascii_downcase, "auto": false }))
@@ -128,7 +129,31 @@ function parse_messages {
     })'
 }
 
+function add_description {
+  local VALUES=$(parse_messages)
+  local TMP_DATA=$(mktemp)
+  echo $VALUES > $TMP_DATA
+
+  # shell commands not supported
+  # https://github.com/stedolan/jq/issues/147
+  # https://stackoverflow.com/questions/36565295/jq-to-replace-text-directly-on-file-like-sed-i
+  # https://unix.stackexchange.com/questions/327394/using-a-command-inside-a-sed-substitution
+
+  # curl -s <URL> | ./pup 'title json{}' | jq '.[].text'
+  # echo "TEST" | sed -e "s/TEST/###$(date)###/"
+
+  for URL in $(cat ${TMP_DATA} | jq -r '.[].description'); do
+    # get html title: assumes always the first
+    DESCRIPTION=$(curl -s ${URL} | ./pup 'title json{}' | jq -r '.[0].text')
+    # replace url with title and ignore failures
+    sed -i -e 's|"description": "'"${URL}"'",|"description": "'"${DESCRIPTION}"'",|g' $TMP_DATA || true
+  done
+
+  echo $(cat ${TMP_DATA})
+}
+
 # global param: <DATA_PATH>
+# param #1: <json_array>
 function append_messages {
   local VALUES=$1
   local OLD_VALUES="$(cat ${DATA_PATH} | jq '.')"
@@ -148,19 +173,18 @@ function main {
   echo "[*] current offset: $(get_latest_offset)"
   echo "[*] current count: $(count_messages)"
 
-  local MESSAGES=$(parse_messages)
+  local MESSAGES=$(add_description)
   echo -e "[*] new messages:\n${MESSAGES}"
-  
+
   append_messages "${MESSAGES}"
 
   echo "[*] latest offset: $(get_latest_offset)"
   echo "[*] latest count: $(count_messages)"
 }
 
-# TODO interactive bot
-# TODO notify on telegram success/failure
-#main
+# TODO interactive bot e.g. latest tags, edit description
+# TODO notify success/failure on telegram 
 install_pup
-
+main
 
 echo "[-] telegram"
