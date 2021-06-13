@@ -78,5 +78,17 @@
         "auto": false
       }
     ]
+  },
+  {
+    "update_id": 60598278,
+    "timestamp": "20210613-155556",
+    "url": "https://duckduckgo.com/",
+    "description": "DuckDuckGo — Privacy, simplified.",
+    "tags": [
+      {
+        "name": "telegram",
+        "auto": true
+      }
+    ]
   }
 ]
