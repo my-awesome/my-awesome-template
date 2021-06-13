@@ -6,7 +6,7 @@ on:
   # TODO restrict path and branch name
   pull_request:
     types: [ closed ]
-    merged: true
+    #merged: true
 
 jobs:
   deploy:

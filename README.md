@@ -2,6 +2,8 @@
 
 Git-based bookmarking tool powered by GitHub actions, integrated with Telegram, built with Hugo and hosted on GitHub pages.
 
+* [Demo](https://my-awesome.github.io/my-awesome-template)
+
 > why ???
 
 * Ask HN: [Do you curate links/bookmarks?](https://news.ycombinator.com/item?id=22158218)
