@@ -26,5 +26,17 @@
         "auto": true
       }
     ]
+  },
+  {
+    "update_id": 60598274,
+    "timestamp": "20210613-152503",
+    "url": "https://github.com/",
+    "description": "GitHub: Where the world builds software · GitHub",
+    "tags": [
+      {
+        "name": "telegram",
+        "auto": true
+      }
+    ]
   }
 ]
