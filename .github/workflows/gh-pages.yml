@@ -3,6 +3,10 @@ name: github-pages
 on:
   # enable manual trigger
   workflow_dispatch:
+  # TODO disable
+  push:
+    branches:
+      - main
   # TODO restrict path and branch name
   pull_request:
     #types: [ closed ]
