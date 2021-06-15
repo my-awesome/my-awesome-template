@@ -3,11 +3,8 @@ name: github-pages
 on:
   # enable manual trigger
   workflow_dispatch:
+  # alternative on PR merged not working
   # https://github.community/t/trigger-workflow-only-on-pull-request-merge/17359/8
-  #pull_request:
-  #  branches:
-  #    - 'telegram-*'
-  #  types: [ closed ]
   workflow_run:
     types:
       - completed
@@ -16,10 +13,8 @@ on:
 
 jobs:
   deploy:
-    #if: github.event.pull_request.merged == true
-    
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -34,7 +29,7 @@ jobs:
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
-        if: github.ref == 'refs/heads/main'
+        if: ${{ github.ref == 'refs/heads/main' }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
