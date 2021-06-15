@@ -1,1 +1,30 @@
-[]
+[
+  {
+    "update_id": 60598282,
+    "timestamp": "20210615-095126",
+    "url": "https://github.com/",
+    "description": "GitHub: Where the world builds software · GitHub",
+    "tags": [
+      {
+        "name": "telegram",
+        "auto": true
+      }
+    ]
+  },
+  {
+    "update_id": 60598283,
+    "timestamp": "20210615-095126",
+    "url": "https://github.com/",
+    "description": "GitHub: Where the world builds software · GitHub",
+    "tags": [
+      {
+        "name": "telegram",
+        "auto": true
+      },
+      {
+        "name": "mytag",
+        "auto": false
+      }
+    ]
+  }
+]
