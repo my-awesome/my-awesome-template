@@ -118,6 +118,7 @@ function parse_messages {
       "timestamp": .timestamp,
       "url": .message_text[] | select(. | startswith($URL_FILTER)),
       "description": .message_text[] | select(. | startswith($URL_FILTER)),
+      "path": "/",
       "tags": (
         [{ "name": "telegram", "auto": true }] +
         (.message_text | map(select(. | startswith($URL_FILTER) | not)) | map({ "name": . | ascii_downcase, "auto": false }))

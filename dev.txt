@@ -6,3 +6,5 @@ https://github.com/pokurt/GitGram
 https://github.com/MadeByThePinsHub/GitGram
 https://github.com/appleboy/telegram-action
 https://dev.to/gh-campus-experts/connecting-github-to-telegram-with-github-actions-1pbe
+
+https://www.namecheap.com/support/knowledgebase/article.aspx/9645/2208/how-do-i-link-my-domain-to-github-pages
