@@ -115,6 +115,7 @@ function parse_messages {
   # - expected format: [{"update_id":123,"message_text":["hello","world"]}]
   # - discard messages with without text e.g. images: [{"update_id":123,"message_text":[""]}]
   # - set as "url" the first item that starts with "http" and convert everything else to a tag
+  # - "description" value (url) is just a placeholder, it's replaced with the <title> of the page afterwards
   echo $MESSAGES | jq \
     --arg URL_FILTER "http" \ '. | map(select(.message_text[0] != "")) |
     map({
@@ -182,7 +183,7 @@ function main {
   echo "[*] latest count: $(count_messages)"
 }
 
-# TODO interactive bot e.g. latest tags, edit description
+# TODO interactive bot e.g. suggest latest tags, edit description
 # TODO notify success/failure on telegram 
 install_pup
 main
