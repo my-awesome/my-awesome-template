@@ -2,10 +2,6 @@
 
 set -eu
 
-echo "[+] update"
-
-gh --version
-
 ##############################
 
 GIT_USER_EMAIL="my-awesome-bot@users.noreply.github.com"
@@ -16,11 +12,15 @@ PR_MESSAGE="Updates telegram messages"
 
 ##############################
 
+echo "[+] update"
+
+gh --version
+
 # 1 line string
-MY_GIT=$(git status)
+GIT_STATUS=$(git status)
 
 # updates only if there are changes
-if [[ -z "${MY_GIT##*nothing to commit*}" ]]; then
+if [[ -z "${GIT_STATUS##*nothing to commit*}" ]]; then
   echo "[-] No changes"
 else
   echo "[-] Updating repository ..."

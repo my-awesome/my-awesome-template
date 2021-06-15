@@ -3,7 +3,7 @@ name: github-pages
 on:
   # enable manual trigger
   workflow_dispatch:
-  # alternative on PR merged not working
+  # alternative "on pr merged" not working
   # https://github.community/t/trigger-workflow-only-on-pull-request-merge/17359/8
   workflow_run:
     types:

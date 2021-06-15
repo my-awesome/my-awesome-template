@@ -3,11 +3,6 @@
 # makes sure all env variables are defined
 set -eu
 
-echo "[+] telegram"
-
-curl --version
-jq --version
-
 # ONLY for local testing: "source" loads env variables
 #source "./telegram.secrets"
 
@@ -109,13 +104,13 @@ function validate_messages {
 function parse_messages {
   local MESSAGES=$(validate_messages)
 
-  # TODO this will keep all invalid messages
+  # this keeps all invalid messages
   # "url": (.message_text[] | select(. | startswith("http")) // "INVALID_URL")
 
   # - expected format: [{"update_id":123,"message_text":["hello","world"]}]
-  # - discard messages with without text e.g. images: [{"update_id":123,"message_text":[""]}]
+  # - discard messages without text e.g. images: [{"update_id":123,"message_text":[""]}]
   # - set as "url" the first item that starts with "http" and convert everything else to a tag
-  # - "description" value (url) is just a placeholder, it's replaced with the <title> of the page afterwards
+  # - "description" value (url) is just a placeholder, it's replaced with the <title> of the page afterwards with "pup"
   echo $MESSAGES | jq \
     --arg URL_FILTER "http" \ '. | map(select(.message_text[0] != "")) |
     map({
@@ -183,9 +178,15 @@ function main {
   echo "[*] latest count: $(count_messages)"
 }
 
+echo "[+] telegram"
+
+curl --version
+jq --version
+install_pup
+
 # TODO interactive bot e.g. suggest latest tags, edit description
 # TODO notify success/failure on telegram 
-install_pup
+# TODO read DATA_PATH from .awesome.yaml (e.g. version, path, format, template)
 main
 
 echo "[-] telegram"
