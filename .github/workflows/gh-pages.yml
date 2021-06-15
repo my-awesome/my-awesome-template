@@ -3,15 +3,15 @@ name: github-pages
 on:
   # enable manual trigger
   workflow_dispatch:
-  # TODO restrict user (bot), path and branch name
-  # https://github.community/t/trigger-workflow-only-on-pull-request-merge/17359/4
+  # https://github.community/t/trigger-workflow-only-on-pull-request-merge/17359/8
   pull_request:
-    #types: [ closed ]
-  push:
+    branches:
+      - 'telegram-*'
+    types: [ closed ]
 
 jobs:
   deploy:
-    #if: github.event_name == 'workflow_dispatch' || github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
