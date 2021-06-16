@@ -1,6 +1,6 @@
 # my-awesome
 
-Git-based bookmarking tool powered by GitHub actions, integrated with Telegram, built with Hugo and hosted on GitHub pages.
+Git-based bookmarking tool powered by GitHub actions, integrated with Telegram, built with Hugo and hosted on GitHub pages
 
 * [Demo](https://my-awesome.github.io/my-awesome-template)
 
@@ -9,6 +9,15 @@ Git-based bookmarking tool powered by GitHub actions, integrated with Telegram, 
 * Ask HN: [Do you curate links/bookmarks?](https://news.ycombinator.com/item?id=22158218)
 * Ask HN: [How do you manage your bookmarks?](https://news.ycombinator.com/item?id=22105561)
 * See [Web Archiving Community](https://github.com/ArchiveBox/ArchiveBox/wiki/Web-Archiving-Community) for alternatives
+
+## Setup
+
+> TODO
+
+1. "Use this template"
+2. create bot
+3. save env (show how to retrieve user_id)
+4. explain parsing (animated gif telegram message) and workflows with diagram
 
 ## Development
 
@@ -42,6 +51,8 @@ cat telegram.secrets
 Hugo
 
 ```bash
+sudo snap install hugo --channel=extended
+
 # generate hugo skeleton
 hugo new site . --force
 
