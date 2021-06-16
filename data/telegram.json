@@ -1,27 +1,10 @@
 [
   {
-    "update_id": 60598284,
-    "timestamp": "20210615-095303",
-    "url": "https://github.com/",
-    "description": "GitHub: Where the world builds software · GitHub",
-    "path": "/",
-    "tags": [
-      {
-        "name": "telegram",
-        "auto": true
-      },
-      {
-        "name": "mytag",
-        "auto": false
-      }
-    ]
-  },
-  {
-    "update_id": 60598285,
-    "timestamp": "20210615-101756",
-    "url": "https://github.com/niqdev",
+    "update_id": 60598302,
+    "timestamp": "20210616-092405",
+    "url": "https://github.com/niqdev/",
     "description": "niqdev · GitHub",
-    "path": "/",
+    "path": "/folder/subfolder",
     "tags": [
       {
         "name": "telegram",
@@ -29,23 +12,6 @@
       },
       {
         "name": "test",
-        "auto": false
-      }
-    ]
-  },
-  {
-    "update_id": 60598286,
-    "timestamp": "20210616-010407",
-    "url": "https://gohugo.io/",
-    "description": "https://gohugo.io/",
-    "path": "/",
-    "tags": [
-      {
-        "name": "telegram",
-        "auto": true
-      },
-      {
-        "name": "js",
         "auto": false
       }
     ]

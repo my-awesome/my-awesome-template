@@ -10,6 +10,21 @@ Git-based bookmarking tool powered by GitHub actions, integrated with Telegram, 
 * Ask HN: [How do you manage your bookmarks?](https://news.ycombinator.com/item?id=22105561)
 * See [Web Archiving Community](https://github.com/ArchiveBox/ArchiveBox/wiki/Web-Archiving-Community) for alternatives
 
+## How it works
+
+> TODO for now you must have your own bot
+
+Rules:
+* every multi-line text is evaluated independently
+* the order of the content doesn't matter
+* a message must contains a valid **url** or it will be ignored i.e. a word that starts with `http`
+* if a line contains a word starting with *underscore* it will be used as **path** e.g. `_folder_subfolder`
+    - optional, default is root `/`
+    - you can defined only 1 path
+* if a line contains a word starting with *hash* it will be used as **tag**
+    - optional, by default a `telegram` tag is added
+    - you can defined multiple tags
+
 ## Setup
 
 > TODO
@@ -17,7 +32,7 @@ Git-based bookmarking tool powered by GitHub actions, integrated with Telegram, 
 1. "Use this template"
 2. create bot
 3. save env (show how to retrieve user_id)
-4. explain parsing (animated gif telegram message) and workflows with diagram
+4. diagram
 
 ## Development
 

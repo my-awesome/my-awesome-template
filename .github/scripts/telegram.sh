@@ -112,18 +112,18 @@ function parse_messages {
   # - set as "url" the first item that starts with "http" and convert everything else to a tag
   # - "description" value (url) is just a placeholder, it's replaced with the <title> of the page afterwards with "pup"
   echo $MESSAGES | jq \
-    --arg URL_FILTER "http" \ '. | map(select(.message_text[0] != "")) |
-    map({
-      "update_id": .update_id,
-      "timestamp": .timestamp,
-      "url": .message_text[] | select(. | startswith($URL_FILTER)),
-      "description": .message_text[] | select(. | startswith($URL_FILTER)),
-      "path": "/",
-      "tags": (
-        [{ "name": "telegram", "auto": true }] +
-        (.message_text | map(select(. | startswith($URL_FILTER) | not)) | map({ "name": . | ascii_downcase, "auto": false }))
-      )
-    })'
+    '. | map(select(.message_text[0] != "")) |
+      map({
+        "update_id": .update_id,
+        "timestamp": .timestamp,
+        "url": .message_text[] | select(. | startswith("http")),
+        "description": .message_text[] | select(. | startswith("http")),
+        "path": ((.message_text | map(select(. | startswith("_")) | gsub("_";"/") | ascii_downcase) | first ) // "/"),
+        "tags": (
+          [{ "name": "telegram", "auto": true }] +
+          (.message_text | map(select(. | startswith("#"))) | map({ "name": . | gsub("#";"") | ascii_downcase, "auto": false }))
+        )
+      })'
 }
 
 function add_description {
@@ -143,7 +143,7 @@ function add_description {
     # get html title: assumes always the first
     DESCRIPTION=$(curl -s ${URL} | ./pup 'title json{}' | jq -r '.[0].text')
     # replace url with title and ignore failures
-    sed -i -e 's|"description": "'"${URL}"'",|"description": "'"${DESCRIPTION}"'",|g' $TMP_DATA || true
+    sed -i -e 's;"description": "'"${URL}"'",;"description": "'"${DESCRIPTION}"'",;g' $TMP_DATA || true
   done
 
   echo $(cat ${TMP_DATA})
