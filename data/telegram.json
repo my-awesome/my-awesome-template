@@ -32,5 +32,22 @@
         "auto": false
       }
     ]
+  },
+  {
+    "update_id": 60598286,
+    "timestamp": "20210616-010407",
+    "url": "https://gohugo.io/",
+    "description": "https://gohugo.io/",
+    "path": "/",
+    "tags": [
+      {
+        "name": "telegram",
+        "auto": true
+      },
+      {
+        "name": "js",
+        "auto": false
+      }
+    ]
   }
 ]
