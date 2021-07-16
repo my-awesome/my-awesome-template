@@ -91,8 +91,8 @@ function validate_messages {
   # - converts whitespaces in new lines
   # - converts string to array splitting by new line
   echo ${RESPONSE} | jq -c \
-    --arg TELEGRAM_FROM_ID ${TELEGRAM_FROM_ID} \
-    --arg TIMESTAMP ${TIMESTAMP} \
+    --arg TELEGRAM_FROM_ID "${TELEGRAM_FROM_ID}" \
+    --arg TIMESTAMP "${TIMESTAMP}" \
     '[ .result[] | select(.message.from.id==($TELEGRAM_FROM_ID | tonumber)) ] |
       map({
         "update_id": .update_id,
