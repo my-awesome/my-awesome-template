@@ -28,5 +28,26 @@
         "auto": true
       }
     ]
+  },
+  {
+    "update_id": 60598306,
+    "timestamp": "2021-07-16T17:42:16Z",
+    "url": "http://duckduckgo.com",
+    "description": "301 Moved Permanently",
+    "path": "/",
+    "tags": [
+      {
+        "name": "telegram",
+        "auto": true
+      },
+      {
+        "name": "search",
+        "auto": false
+      },
+      {
+        "name": "example",
+        "auto": false
+      }
+    ]
   }
 ]
