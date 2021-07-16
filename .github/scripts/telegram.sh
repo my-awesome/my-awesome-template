@@ -184,6 +184,7 @@ function update_tags {
 
 function main {
   echo "[*] DATA_PATH=${DATA_PATH}"
+  echo "[*] TIMESTAMP=${TIMESTAMP}"
   echo "[*] current offset: $(get_latest_offset)"
   echo "[*] current count: $(count_messages)"
 
