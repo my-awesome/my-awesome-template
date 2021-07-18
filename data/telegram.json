@@ -5,27 +5,25 @@
     "url": "https://github.com/niqdev/",
     "description": "niqdev · GitHub",
     "path": "/folder/subfolder",
+    "source": "telegram",
     "tags": [
       {
-        "name": "telegram",
-        "auto": true
-      },
-      {
-        "name": "test",
+        "name": "github",
         "auto": false
       }
     ]
   },
   {
-    "update_id": 60598306,
+    "update_id": 60598310,
     "timestamp": "2021-06-22T09:11:13Z",
     "url": "https://gohugo.io",
     "description": "The world’s fastest framework for building websites | Hugo",
     "path": "/",
+    "source": "telegram",
     "tags": [
       {
-        "name": "telegram",
-        "auto": true
+        "name": "test",
+        "auto": false
       }
     ]
   }
