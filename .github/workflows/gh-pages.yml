@@ -34,3 +34,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
+          # custom domains are dropped on every deploy without CNAME file in the publish directory
+          #cname: example.com
