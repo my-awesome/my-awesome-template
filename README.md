@@ -3,6 +3,7 @@
 Git-based bookmarking tool powered by GitHub actions, integrated with Telegram, built with Hugo and hosted on GitHub pages
 
 * [Demo](https://my-awesome.github.io/my-awesome-template)
+* [myawesome.dev](https://myawesome.dev)
 
 > why ???
 
@@ -20,9 +21,9 @@ Rules:
 * a message must contains a valid **url** or it will be ignored i.e. a word that starts with `http`
 * if a line contains a word starting with *underscore* it will be used as **path** e.g. `_folder_subfolder`
     - optional, default is root `/`
-    - you can defined only 1 path
-* if a line contains a word starting with *hash* it will be used as **tag**
-    - optional, by default a `telegram` tag is added
+    - you can defined only 1 path: only the first one is used
+* if a line contains a word starting with *hash* it will be used as **tag** e.g. `#mytag`
+    - optional, by default are always converted to lowercase
     - you can defined multiple tags
 
 ## Setup
@@ -30,7 +31,7 @@ Rules:
 > TODO
 
 1. "Use this template"
-2. create bot
+2. create telegram bot
 3. save env (show how to retrieve user_id)
 4. diagram
 
@@ -58,7 +59,7 @@ http https://api.telegram.org/bot<TELEGRAM_API_TOKEN>/getUpdates?offset=<TELEGRA
 # requires
 cat telegram.secrets 
 #DATA_PATH="./data/telegram.json"
-#TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+#TIMESTAMP=$(date -u +%Y-%m-%dT%H:%M:%SZ)
 #TELEGRAM_API_TOKEN=
 #TELEGRAM_FROM_ID=
 ```
