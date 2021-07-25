@@ -14,7 +14,7 @@
     ]
   },
   {
-    "update_id": 60598310,
+    "update_id": 60598324,
     "timestamp": "2021-06-22T09:11:13Z",
     "url": "https://gohugo.io",
     "description": "The world’s fastest framework for building websites | Hugo",
@@ -23,34 +23,6 @@
     "tags": [
       {
         "name": "test",
-        "auto": false
-      }
-    ]
-  },
-  {
-    "update_id": 60598323,
-    "timestamp": "2021-07-25T09:52:51Z",
-    "url": "https://aflplus.plus",
-    "description": "The AFL++ fuzzing framework | AFLplusplus",
-    "source": "telegram",
-    "path": "/security",
-    "tags": [
-      {
-        "name": "fuzzer",
-        "auto": false
-      }
-    ]
-  },
-  {
-    "update_id": 60598324,
-    "timestamp": "2021-07-25T09:52:51Z",
-    "url": "https://cipher387.github.io/osint_stuff_tool_collection",
-    "description": "301 Moved Permanently",
-    "source": "telegram",
-    "path": "/security",
-    "tags": [
-      {
-        "name": "osint",
         "auto": false
       }
     ]
