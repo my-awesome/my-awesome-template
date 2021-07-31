@@ -19,7 +19,7 @@ Rules:
 * every multi-line text is evaluated independently
 * the order of the content doesn't matter
 * a message must contains a valid **url** or it will be ignored i.e. a word that starts with `http`
-* if a line contains a word starting with *plus* it will be used as **source** e.g. `+hackernews`
+* if a line contains a word starting with *ampersand* it will be used as **source** e.g. `&hackernews`
     - optional, default path is `unknown`
     - you can define one source: only the first one is used
 * if a line contains a word starting with *underscore* it will be used as **path** e.g. `_folder_subfolder`
