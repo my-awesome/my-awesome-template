@@ -1,6 +1,7 @@
 ---
 title: TODO
 tags:
+  - example
   - github
   - test
 folders:
