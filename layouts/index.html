@@ -3,10 +3,16 @@
         <div>{{ .timestamp }}</div>
         <div><a href="{{ .url }}" target="_blank">{{ .description }}</a></div>
         <ul>
-            <li>{{ .path }}</li>
-            {{ range .tags }}
-            <li>{{ .name }} ({{ .auto }})</li>
-            {{ end }}
+            <li>client: {{ .client }}</li>
+            <li>source: {{ .source }}</li>
+            <li>folder: {{ .path }}</li>
+            <li>tags:
+                <ul>
+                    {{ range .tags }}
+                    <li>{{ .name }} (auto={{ .auto }})</li>
+                    {{ end }}
+                </ul>
+            </li>
         </ul>
         <br>
     {{ end }}

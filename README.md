@@ -19,11 +19,14 @@ Rules:
 * every multi-line text is evaluated independently
 * the order of the content doesn't matter
 * a message must contains a valid **url** or it will be ignored i.e. a word that starts with `http`
+* if a line contains a word starting with *plus* it will be used as **source** e.g. `+hackernews`
+    - optional, default path is `unknown`
+    - you can define one source: only the first one is used
 * if a line contains a word starting with *underscore* it will be used as **path** e.g. `_folder_subfolder`
     - optional, default path is `/random`
-    - you can define 1 path: only the first one is used
+    - you can define one path: only the first one is used
 * if a line contains a word starting with *hash* it will be used as **tag** e.g. `#mytag`
-    - optional, tags are always converted to lowercase by default
+    - optional, default is empty
     - you can define multiple tags
 
 ## Setup
