@@ -9,6 +9,7 @@ Git-based bookmarking tool powered by GitHub actions, integrated with Telegram, 
 
 * Ask HN: [Do you curate links/bookmarks?](https://news.ycombinator.com/item?id=22158218)
 * Ask HN: [How do you manage your bookmarks?](https://news.ycombinator.com/item?id=22105561)
+* Ask HN: [Does anybody still use bookmarking services?](https://news.ycombinator.com/item?id=31848210)
 * See [Web Archiving Community](https://github.com/ArchiveBox/ArchiveBox/wiki/Web-Archiving-Community) for alternatives
 
 ## How it works
