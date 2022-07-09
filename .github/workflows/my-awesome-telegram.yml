@@ -6,6 +6,10 @@ on:
   # schedule:
   #   # every 12 hours
   #   - cron: '0 0,12 * * *'
+  # TODO remove
+  push:
+    branches:
+      - main
 
 jobs:
   telegram:
@@ -17,17 +21,17 @@ jobs:
           echo "TIMESTAMP=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> $GITHUB_ENV
 
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      # - name: Sync Telegram
-      #   run: my-awesome/actions/telegram@main
-      #   with:
-      #     data-path: "./data/telegram.json"
-      #   env:
-      #     TIMESTAMP: ${{ env.TIMESTAMP }}
-      #     # add secrets manually in settings
-      #     TELEGRAM_API_TOKEN: ${{ secrets.TELEGRAM_API_TOKEN }}
-      #     TELEGRAM_FROM_ID: ${{ secrets.TELEGRAM_FROM_ID }}        
+      - name: Sync Telegram
+        run: my-awesome/actions/telegram-action@main
+        with:
+          data-path: "./data/telegram.json"
+        env:
+          TIMESTAMP: ${{ env.TIMESTAMP }}
+          # secrets from settings
+          TELEGRAM_API_TOKEN: ${{ secrets.TELEGRAM_API_TOKEN }}
+          TELEGRAM_FROM_ID: ${{ secrets.TELEGRAM_FROM_ID }}
       
       - name: Update repository
         run: my-awesome/actions/gh-update-action@main
