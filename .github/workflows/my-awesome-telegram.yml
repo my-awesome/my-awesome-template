@@ -6,7 +6,6 @@ on:
   # schedule:
   #   # every 12 hours
   #   - cron: '0 0,12 * * *'
-  # TODO remove
 
 jobs:
   telegram:

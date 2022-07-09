@@ -34,15 +34,18 @@ Rules:
 
 > TODO
 
-1. "Use this template"
+1. [Use this template](https://github.com/my-awesome/my-awesome-template/generate)
 2. create telegram bot
 3. save env (show how to retrieve user_id)
 4. diagram
 
 ## Development
 
-Hugo
+See [my-awesome/actions](https://github.com/my-awesome/actions)
 
+### Hugo
+
+Resources
 * [Hugo](https://gohugo.io/documentation)
 * [20 Minute Hugo](https://www.youtube.com/playlist?list=PLbWvcwWtuDm1OpcbohZTOwwzmc8SMmlBD) (video)
 * [Hugo GitHub Action](https://github.com/marketplace/actions/hugo-setup)
