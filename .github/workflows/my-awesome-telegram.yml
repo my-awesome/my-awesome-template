@@ -24,7 +24,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Sync Telegram
-        run: my-awesome/actions/telegram-action@main
+        uses: my-awesome/actions/telegram-action@main
         with:
           data-path: "./data/telegram.json"
         env:
@@ -34,7 +34,7 @@ jobs:
           TELEGRAM_FROM_ID: ${{ secrets.TELEGRAM_FROM_ID }}
       
       - name: Update repository
-        run: my-awesome/actions/gh-update-action@main
+        uses: my-awesome/actions/gh-update-action@main
         with:
           user-email: "my-awesome-bot@users.noreply.github.com"
           user-name: "my-awesome-bot"
