@@ -1,4 +1,4 @@
-name: my-awesome-template
+name: my-awesome-telegram
 
 on:
   # enable manual trigger
@@ -7,12 +7,9 @@ on:
   #   # every 12 hours
   #   - cron: '0 0,12 * * *'
   # TODO remove
-  push:
-    branches:
-      - main
 
 jobs:
-  template:
+  telegram:
     runs-on: ubuntu-latest
     steps:
       - name: Set variables
