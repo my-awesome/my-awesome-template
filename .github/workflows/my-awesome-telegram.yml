@@ -1,4 +1,4 @@
-name: my-awesome-telegram
+name: my-awesome-template
 
 on:
   # enable manual trigger
@@ -12,7 +12,7 @@ on:
       - main
 
 jobs:
-  telegram:
+  template:
     runs-on: ubuntu-latest
     steps:
       - name: Set variables
