@@ -1,4 +1,6 @@
-# my-awesome
+# my-awesome-template
+
+[![my-awesome-telegram](https://github.com/my-awesome/my-awesome-template/actions/workflows/my-awesome-telegram.yml/badge.svg)](https://github.com/my-awesome/my-awesome-template/actions/workflows/my-awesome-telegram.yml)
 
 Git-based bookmarking tool powered by GitHub actions, integrated with Telegram, built with Hugo and hosted on GitHub pages
 
