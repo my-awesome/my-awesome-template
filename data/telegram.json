@@ -32,5 +32,20 @@
         "auto": false
       }
     ]
+  },
+  {
+    "update_id": 899441717,
+    "timestamp": "2022-07-09T13:11:45Z",
+    "url": "https://news.ycombinator.com",
+    "description": "Hacker News",
+    "client": "telegram",
+    "source": "unknown",
+    "path": "/source",
+    "tags": [
+      {
+        "name": "news",
+        "auto": false
+      }
+    ]
   }
 ]
