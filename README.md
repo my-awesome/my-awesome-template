@@ -14,6 +14,7 @@ Git-based bookmarking tool powered by GitHub actions, integrated with Telegram, 
 * Ask HN: [Does anybody still use bookmarking services?](https://news.ycombinator.com/item?id=31848210)
 * Ask HN: [Why haven't bookmarks been re-invented?](https://news.ycombinator.com/item?id=34176035)
 * [My bad habit of hoarding information](https://news.ycombinator.com/item?id=34272834)
+* Tell HN: [My new free note taking tool](https://news.ycombinator.com/item?id=32152935)
 * See [Web Archiving Community](https://github.com/ArchiveBox/ArchiveBox/wiki/Web-Archiving-Community) for alternatives
 
 ## How it works
